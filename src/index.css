@@ -101,7 +101,7 @@ body {
   width: 50px;
   top: 100px;
   align-items: flex-end;
-  z-index: 100;
+  z-index: 200;
 }
 
 .control-btn {
@@ -127,6 +127,12 @@ body {
   flex-direction: row;
   
   z-index: 100;
+}
+
+@media screen and (max-width: 678px) {
+  .righttopSideBar {
+    display: none;
+  }
 }
 
 .panel {
@@ -781,4 +787,50 @@ h6:hover {
   position: relative;
   height: 100%;
   width: 100%;
+}
+
+.texture_row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.texture_row > .image {
+  width: 30%;
+  cursor: pointer;
+}
+
+.texture_row > .image > img {
+  width: 50%;
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.save_part {
+  margin-right: 30px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.save_name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.save_name > p {
+  font-weight: 700;
+}
+
+.share {
+  display: flex;
+  align-items: center;
+}
+
+.share > p {
+  font-size: 15px;
+  font-weight: 700;
 }

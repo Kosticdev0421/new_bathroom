@@ -514,6 +514,7 @@ const onmouseup = (e) => {
       temp_object_real = objectIntersects[1]?.object ?? null;
 
       $(".functionBoard").css({ display: "block" });
+      $(".texture").css({ marginLeft: "0px" });
       if (temp_object.userData.type === "door") {
         getObjectColor(temp_object);
         let redColor = parseInt(255 * obtainedObjectColor.r);
@@ -533,6 +534,7 @@ const onmouseup = (e) => {
     selectedFlag = false;
     $(".functionBoard").css({ display: "none" });
     $(".colorBoard").css({ display: "none" });
+    $(".texture").css({ marginLeft: "-470px" });
   }
 
   Update();
@@ -1357,7 +1359,7 @@ const initThree = () => {
   initLight();
   GenerateBathroom();
   loadDoor("assets/doors/panel.glb", 1, 1);
-  loadModel("assets/bathtub.glb");
+  loadModel("assets/doors/bathtub.glb");
   animate();
 };
 initThree();
@@ -1658,7 +1660,8 @@ const UI = observer(() => {
     let positionData;
     let positionVector;
     if (flag === 0) {
-      if (currentPosition === -1) return;
+      if (currentPosition === -1)
+        return;
       positionData = getPositionData(currentPosition);
       positionVector = positionData.from;
       localStorage.setItem("current_position", currentPosition - 1);
@@ -1678,7 +1681,11 @@ const UI = observer(() => {
   }
 
   function SideViewCamera(type, wall) {
+
     console.log("camera");
+
+    canvas.setAttribute("id", "sideviewcanva");
+
     side_view_type = wall;
     STORE.view = 0;
     switch (type) {
@@ -1704,10 +1711,6 @@ const UI = observer(() => {
         break;
       default:
     }
-    // orthoCam.left = min;
-    // orthoCam.right = max;
-    // orthoCam.top = 0;
-    // orthoCam.buttom = STORE.Length;
   }
 
   const fetchData = async () => {
@@ -2104,6 +2107,52 @@ const UI = observer(() => {
                   </div>
                 )}
               </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          className="roomsSideBar texture"
+          style={{ marginLeft: -470 }}
+        >
+          <div className="d-flex r_title border-bottom">
+            <h6
+              className="trig-btn  py-3 w-100"
+              style={{ color: "#555", marginTop: "0" }}
+            >
+              Texture
+            </h6>
+            <span
+              className="close"
+              onClick={(e) => {
+                e.preventDefault();
+                setIsCategory(1 - isCategory);
+                setMenuOption([
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                ]);
+              }}
+            >
+              X
+            </span>
+          </div>
+          <div className="d-flex flex-wrap w-100">
+            <div className="texture_row">
+              <div className="image"><img src="./assets/tiles/tiled1.jpg" alt="" /></div>
+              <div className="image"><img src="./assets/tiles/tiled2.png" alt="" /></div>
+              <div className="image"><img src="./assets/tiles/tiled3.png" alt="" /></div>
+            </div>
+            <div className="texture_row">
+              <div className="image"><img src="./assets/tiles/tiled1.jpg" alt="" /></div>
+              <div className="image"><img src="./assets/tiles/tiled2.png" alt="" /></div>
+              <div className="image"><img src="./assets/tiles/tiled3.png" alt="" /></div>
             </div>
           </div>
         </div>
@@ -2521,7 +2570,7 @@ const UI = observer(() => {
             style={{ display: STORE.view !== 1 ? "" : "none" }}
             className="top-0 start-0 position-absolute w-100 h-100"
           ></div>
-          <div className="canvas">
+          <div className="canvas" id={panel ? 'sideviewcanva' : ''}>
             <div
               id="canvas-container"
               className="border col-12"
